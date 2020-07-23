@@ -1,0 +1,1 @@
+Duel.LoadScript("TrinityFormat.lua")
