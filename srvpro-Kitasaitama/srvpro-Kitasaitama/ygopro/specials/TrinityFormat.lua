@@ -14,7 +14,7 @@ local function sumexcess(c,tp,lc)
 end
 local function checkop(e,tp,eg,ep,ev,re,r,rp)
 	local ps=0
-    for tc in aux.Next(eg) do
+	for tc in aux.Next(eg) do
 		local p=tc:GetSummonPlayer()
 		ps=ps|1<<p
 		if lim[p]==0 and (tc:IsSummonType(SUMMON_TYPE_DUAL) or tc:IsCode(45467446,86489182)) then lim[p+2]=lim[p+2]-1 end
@@ -41,7 +41,7 @@ local function checkop(e,tp,eg,ep,ev,re,r,rp)
 				elseif tlc==16 then
 					Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOGRAVE)
 					local g=eg:FilterSelect(p,sumexcess,-lim[p]+lim[p+2],-lim[p]+lim[p+2],nil,p,lc)
-					Duel.NegateSummon(g)
+					if Duel.GetCurrentChain()==0 then Duel.NegateSummon(g) end
 					Duel.SendtoGrave(g,REASON_RULE+REASON_RETURN)
 					lim[p]=lim[p]+#g
 				elseif tlc==32 then
@@ -93,8 +93,8 @@ if not global_check then
 	ge2:SetProperty(EFFECT_FLAG_DELAY)
 	ge2:SetOperation(checkop)
 	Duel.RegisterEffect(ge2,0)
-    local e4=ge2:Clone()
-    e4:SetCode(EVENT_SUMMON_SUCCESS)
+	local e4=ge2:Clone()
+	e4:SetCode(EVENT_SUMMON_SUCCESS)
 	Duel.RegisterEffect(e4,0)
 	local ge3=e4:Clone()
 	ge3:SetCode(EVENT_SPSUMMON_NEGATED)
