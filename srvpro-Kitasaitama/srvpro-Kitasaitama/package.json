@@ -13,7 +13,7 @@
   "dependencies": {
     "@types/node": "^14.0.13",
     "@types/underscore": "^1.10.0",
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "axios": "^0.19.2",
     "bunyan": "latest",
     "challonge": "latest",
